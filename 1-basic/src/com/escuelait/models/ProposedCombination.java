@@ -17,6 +17,10 @@ public class ProposedCombination extends Combination {
 		this.whites = 0;
 	}
 
+	public ProposedCombination(String colors) {
+		this.colors = colors;
+	}
+
 	public int getWhites() {
 		return this.whites;
 	}

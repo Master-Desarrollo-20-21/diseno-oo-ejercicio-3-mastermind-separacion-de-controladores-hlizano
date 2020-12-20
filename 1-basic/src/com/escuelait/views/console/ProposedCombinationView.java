@@ -1,23 +1,23 @@
 package com.escuelait.views.console;
 
+import com.escuelait.controllers.ProposedCombinationController;
 import com.escuelait.models.Color;
-import com.escuelait.models.ProposedCombination;
 import com.escuelait.utils.Console;
 import com.escuelait.views.Message;
 
 public class ProposedCombinationView {
 	
-	ProposedCombination proposedCombination;
+	private ProposedCombinationController proposedCombinationController;
+	
+	public ProposedCombinationView(ProposedCombinationController proposedCombinationController) {
+		this.proposedCombinationController = proposedCombinationController;
+	}
 	
 	public ProposedCombinationView() {
-		this.proposedCombination = new ProposedCombination();
-	}
-	
-	public ProposedCombinationView(ProposedCombination proposedCombination) {
-		this.proposedCombination = proposedCombination;
+
 	}
 
-	public ProposedCombination read(String title) {
+	public String read(String title) {
 		boolean isValid = false;
 		Console console = Console.getInstance();
 		String proposedCombinationColors = "";
@@ -27,9 +27,8 @@ public class ProposedCombinationView {
 			proposedCombinationColors = console.readString().toLowerCase();
 			isValid = this.checkProposedCombination(proposedCombinationColors);
 		}while (!isValid);
-		console.writeln("");
-		proposedCombination.setProposedCombinationColors(proposedCombinationColors);		
-		return proposedCombination;
+		console.writeln("");	
+		return proposedCombinationColors;
 	}	
 	
 	public boolean checkProposedCombination(String colors) {
@@ -63,10 +62,14 @@ public class ProposedCombinationView {
 	}
 
 	public void write() {
-		String colors = proposedCombination.getColors();
-		int whites = proposedCombination.getWhites();
-		int blacks = proposedCombination.getBlacks();
+		String colors = proposedCombinationController.getColors();
+		int whites = proposedCombinationController.getWhites();
+		int blacks = proposedCombinationController.getBlacks();
 		Console.getInstance().writeln(colors + " --> " + blacks + " blacks " + "and " + whites + " whites");
+	}
+
+	public void setProposedCombination(int i) {
+		proposedCombinationController.setProposedCombination(i);
 	}
 
 }
